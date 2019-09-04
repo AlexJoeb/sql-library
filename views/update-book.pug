@@ -3,7 +3,7 @@ block title
     Title=`Edit a Book`
 block content
     h1 Edit a Book
-    include form_error
+    include error
     form(method="post" action=`/book/${book.id}`)
         p
             label(for="title") Title

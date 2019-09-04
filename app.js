@@ -40,7 +40,7 @@ app.use((error, request, response, next) => {
     const err = new Error("Opps! This URL couldn't be found.");
     err.status = 404;
     response.status(err.status);
-    response.render('404');
+    response.render('page-not-found');
 });
 
 // Setting Express's Port

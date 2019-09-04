@@ -1,10 +1,13 @@
 body {
   padding: 10px 50px 50px;
-  font: 18px "Garamond", serif;
+  font: 16px "Courier New", serif;
+  font-weight: 400;
+
+  background-color: #F4F9FC;
 }
 
 a {
-  color: #019875;
+  color: #3E92CC;
   text-decoration: none;
   font-weight: bold;
   transition: 0.4s;
@@ -16,16 +19,12 @@ a {
 
 a.button, input[type=submit] {
   color: white;
-  background: skyblue;
-  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: #3E92CC;
+  font-family: Helvetica, Arial, sans-serif;
   padding: 10px 14px 12px;
   font-size: 14px;
 
   border-radius: 2px;
-  border-right: 3px solid lightblue;
-  border-bottom: 3px solid lightblue;
-
-  box-shadow: 0 5px 25px lightgray;
   cursor: pointer;
 }
 

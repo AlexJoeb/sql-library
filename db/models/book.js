@@ -29,10 +29,10 @@ module.exports = (sequelize) => {
             allowNull: false,
             validate: {
                 notNull: {
-                    msg: "No value found for title, please insert a value."
+                    msg: "No value found for author, please insert a value."
                 },
                 notEmpty: {
-                    msg: "No value found for title, please insert a value."
+                    msg: "No value found for author, please insert a value."
                 }
             }
         },

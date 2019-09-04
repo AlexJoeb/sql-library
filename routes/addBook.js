@@ -10,11 +10,16 @@ const db = require("../db");
 // Books Import
 const { Book } = db.models;
 
+// JSON Parsing
+router.use(express.json());
+router.use(express.urlencoded({extended: false}));
+
 // Express Routing
     // Displaying the new book route. (get request)
     router.get("/books/new", (request, response) => {
         try {
-            response.render("addbook");
+            console.log("Made it here");
+            response.render("new-book");
         } catch (err) {
             error.status = 500;
             error.message = "Server error."
@@ -25,6 +30,7 @@ const { Book } = db.models;
     // After new book forum is submitted. (post request)
     router.post("/books/new", (request, response) => {
         // Async for Promise
+        console.log(request.body);
         (async () => {
             // Book Variables
             const id = request.params.id;
@@ -48,9 +54,9 @@ const { Book } = db.models;
 
             } catch (err) {
                 // SQLize errors.
-                if(err.name === "SequeelizeValidationError"){
+                if(err.name === "SequelizeValidationError"){
                     const errors = err.errors;
-                    response.render("addbook", { errors });
+                    response.render("new-book", { errors });
                 } else {
                     // Other Errors
                     console.error(err);

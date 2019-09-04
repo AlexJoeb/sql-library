@@ -19,13 +19,14 @@ router.use(express.urlencoded({extended: false}));
     router.get("/book/:id", (request, response) => {
         // Async for SQLize
         (async () => {
-            try {
+            try {        
+
                 const book = await Book.findByPk(request.params.id);
-                response.render('editbook', { book });
+                response.render('update-book', { book });
             } catch (err) {
                 console.error("Could not retrieve book data => ", err);
             }
-        })
+        })();
     });
     // After Updatet Book Form Submission (post request)
     router.post("/book/:id", (request, response) => {
@@ -40,17 +41,19 @@ router.use(express.urlencoded({extended: false}));
                     });
             }catch(err){
                 // Catching SQLize Errors
-                if(error.name === 'SequelizeValidationError'){
-                    const erros = err.erros;
+                if(err.name === 'SequelizeValidationError'){
+                    const errors = err.errors;
                     const book = {
-                        id: req.body.id,
-                        title: req.body.title,
-                        author: req.body.author,
-                        genre: req.body.genre,
-                        year: req.body.year
+                        id: request.params.id,
+                        title: request.body.title,
+                        author: request.body.author,
+                        genre: request.body.genre,
+                        year: request.body.year
                     }
 
-                    response.render('editbook', { book, errors });
+                    console.log(book);
+
+                    response.render('update-book', { book, errors });
                 }else{
                     // Not SQLize, so respond with error template.
                     console.error(err);
@@ -66,8 +69,12 @@ router.use(express.urlencoded({extended: false}));
     router.post('/book/:id/delete', (request, response) => {
         (async () => {
             try{
-                const deleteBook = await Book.findByPk(request.params.id);
-                await deleteBook.destory();
+                Book.destroy({
+                    where: {
+                        id: request.params.id,
+                    }
+                });
+                console.log("Deleted.");
                 response.redirect("/books");
             }catch(err){
                 console.error("Could not delete book => ", err);
