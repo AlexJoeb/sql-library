@@ -30,7 +30,6 @@ router.use(express.urlencoded({extended: false}));
     // After new book forum is submitted. (post request)
     router.post("/books/new", (request, response) => {
         // Async for Promise
-        console.log(request.body);
         (async () => {
             // Book Variables
             const id = request.params.id;
@@ -49,7 +48,6 @@ router.use(express.urlencoded({extended: false}));
                     year
                 });
 
-                console.log(book);
                 response.redirect(`/book/${book.dataValues.id}`);
 
             } catch (err) {
